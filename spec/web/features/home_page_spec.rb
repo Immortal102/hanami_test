@@ -12,4 +12,8 @@ describe 'home page' do
   it 'contains correct header' do
     expect(home_page).to have_content('Bookshelf')
   end
+
+  it 'contains correct subheader' do
+    expect(home_page).to have_content('Home')
+  end
 end

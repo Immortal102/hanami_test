@@ -13,5 +13,13 @@ describe 'books page' do
     it 'shows books list' do
       expect(index_page.books.size).to eq(2)
     end
+
+    it 'contains correct header' do
+      expect(index_page).to have_content('Bookshelf')
+    end
+
+    it 'contains correct subheader' do
+      expect(index_page).to have_content('Books list')
+    end
   end
 end
