@@ -3,6 +3,7 @@ require_relative './spec_helper'
 
 require 'capybara'
 require 'capybara/rspec'
+require 'site_prism'
 
 RSpec.configure do |config|
   config.include RSpec::FeatureExampleGroup
