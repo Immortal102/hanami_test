@@ -33,7 +33,7 @@ describe 'books page' do
       end
 
       it 'contains correct books content' do
-        expect(index_page.books.map { |b| b.title.text }).to match_array(['Book1 (first_author)', 'Book2 (second_author)'])
+        expect(index_page.books.map(&:text)).to match_array(['Book1 ( first_author )', 'Book2 ( second_author )'])
       end
 
       it 'does not show no books placeholder' do
