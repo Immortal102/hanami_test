@@ -2,6 +2,10 @@ module Web::Controllers::Books
   class Index
     include Web::Action
 
-    def call(params); end
+    expose :books
+
+    def call(params)
+      @books ||= BookRepository.all
+    end
   end
 end

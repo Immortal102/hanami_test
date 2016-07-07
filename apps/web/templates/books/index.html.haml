@@ -1,4 +1,11 @@
 %h2 Books list
 #books
-  .book First book
-  .book Second book
+  - if books.any?
+    - books.each do |book|
+      .book
+        = book.title
+        (
+        = book.author
+        )
+  - else
+    .no-books There are no books yet
