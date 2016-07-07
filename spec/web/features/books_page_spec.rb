@@ -1,6 +1,8 @@
 require 'features_helper'
 
 describe 'books page' do
+  let(:book1) { create :book, title: 'Book1', author: 'first_author' }
+  let(:book2) { create :book, title: 'Book2', author: 'second_author' }
   let(:index_page) { Books::IndexPage.new }
 
   describe 'index' do
