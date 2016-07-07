@@ -1,8 +1,6 @@
 require 'features_helper'
 
 describe 'books page' do
-  let(:book1) { create :book, title: 'Book1', author: 'first_author' }
-  let(:book2) { create :book, title: 'Book2', author: 'second_author' }
   let(:index_page) { Books::IndexPage.new }
 
   describe 'index' do
@@ -12,16 +10,35 @@ describe 'books page' do
       expect(index_page).to be_displayed
     end
 
-    it 'shows books list' do
-      expect(index_page.books.size).to eq(2)
-    end
-
     it 'contains correct header' do
       expect(index_page).to have_content('Bookshelf')
     end
 
     it 'contains correct subheader' do
       expect(index_page).to have_content('Books list')
+    end
+
+    it 'shows no books placeholder' do
+      expect(index_page).to have_content('There are no books yet')
+    end
+
+    context 'when there are some books present' do
+      let!(:book1) { create :book, title: 'Book1', author: 'first_author' }
+      let!(:book2) { create :book, title: 'Book2', author: 'second_author' }
+
+      before { index_page.load }
+
+      it 'shows books list' do
+        expect(index_page.books.size).to eq(2)
+      end
+
+      it 'contains correct books content' do
+        expect(index_page.books.map { |b| b.title.text }).to match_array(['Book1 (first_author)', 'Book2 (second_author)'])
+      end
+
+      it 'does not show no books placeholder' do
+        expect(index_page).to_not have_content('There are no books yet')
+      end
     end
   end
 end
