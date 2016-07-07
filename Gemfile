@@ -18,6 +18,7 @@ group :test do
   gem 'factory_girl'
 
   gem 'site_prism'
+  gem 'database_cleaner'
 end
 
 group :production do

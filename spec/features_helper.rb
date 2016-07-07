@@ -3,6 +3,7 @@ require_relative './spec_helper'
 
 require 'capybara'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 require 'site_prism'
 
 RSpec.configure do |config|
