@@ -2,6 +2,7 @@ require 'features_helper'
 
 describe 'books page' do
   let(:index_page) { Books::IndexPage.new }
+  let(:new_page) { Books::NewPage.new }
 
   describe 'index' do
     before { index_page.load }
@@ -39,6 +40,19 @@ describe 'books page' do
       it 'does not show no books placeholder' do
         expect(index_page).to_not have_content('There are no books yet')
       end
+    end
+  end
+
+  describe 'new' do
+    before { new_page.load }
+
+    it 'allows to create new book' do
+      new_page.form.title.set 'Some title'
+      new_page.form.author.set 'Some author'
+      new_page.form.submit.click
+
+      expect(index_page).to be_displayed
+      expect(index_page.books.first.text).to eq('Some title ( Some author )')
     end
   end
 end
