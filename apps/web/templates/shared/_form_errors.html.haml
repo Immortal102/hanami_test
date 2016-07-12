@@ -1,0 +1,8 @@
+- unless params.valid?
+  .errors
+    %h3 Some errors occured
+    %ul
+      - params.errors.each do |e|
+        %li
+          = e.attribute_name
+          must be present

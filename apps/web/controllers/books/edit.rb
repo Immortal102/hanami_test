@@ -1,11 +1,11 @@
 module Web::Controllers::Books
-  class New
+  class Edit
     include Web::Action
 
     expose :book
 
     def call(params)
-      @book = Book.new
+      @book ||= BookRepository.find(params[:id])
     end
   end
 end
