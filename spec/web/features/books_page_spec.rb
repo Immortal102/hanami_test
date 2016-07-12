@@ -59,14 +59,14 @@ describe 'books page' do
       new_page.form.author.set 'Some author'
       new_page.form.submit.click
 
-      expect(new_page).to be_displayed
+      expect(new_page.form).to be_visible
     end
 
     it 'validates author presence' do
       new_page.form.title.set 'Some title'
       new_page.form.submit.click
 
-      expect(new_page).to be_displayed
+      expect(new_page.form).to be_visible
     end
   end
 end
