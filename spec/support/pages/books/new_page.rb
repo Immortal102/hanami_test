@@ -5,11 +5,11 @@ module Books
     set_url '/books/new'
 
     class BookForm < SitePrism::Section
-      element :title, '#book_title'
-      element :author, '#book_author'
+      element :title, '[name*="title"]'
+      element :author, '[name*="author"]'
       element :submit, '[name="commit"]'
     end
 
-    section :form, BookForm, '#new_book'
+    section :form, BookForm, '#book-form'
   end
 end

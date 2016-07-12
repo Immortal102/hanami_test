@@ -3,7 +3,7 @@ module Web::Views::Books
     include Web::View
 
     def form
-      form_for :book, routes.new_book_path do
+      form_for :book, routes.create_book_path do
         div class: 'input' do
           label      :title
           text_field :title
@@ -15,7 +15,7 @@ module Web::Views::Books
         end
 
         div class: 'control' do
-          submit 'Create'
+          submit 'Create', name: :commit
         end
       end
     end
