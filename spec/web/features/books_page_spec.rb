@@ -54,5 +54,19 @@ describe 'books page' do
       expect(index_page).to be_displayed
       expect(index_page.books.first.text).to eq('Some title ( Some author )')
     end
+
+    it 'validates title presence' do
+      new_page.form.author.set 'Some author'
+      new_page.form.submit.click
+
+      expect(new_page).to be_displayed
+    end
+
+    it 'validates author presence' do
+      new_page.form.title.set 'Some title'
+      new_page.form.submit.click
+
+      expect(new_page).to be_displayed
+    end
   end
 end
