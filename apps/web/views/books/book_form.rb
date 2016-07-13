@@ -5,6 +5,7 @@ extend ActiveSupport::Concern
   included do
     def form(book)
       form_for :book, book.new_record? ?  routes.create_book_path : routes.update_book_path(book.id) do
+        hidden_field(nil, name: '_method', value: 'PUT') unless book.new_record?
         div class: 'input' do
           label      :title
           text_field :title, value: book.title

@@ -4,6 +4,6 @@ class Book
   attributes :author, :title
 
   def new_record?
-    BookRepository.find(id).nil?
+    @new_record ||= BookRepository.find(id).nil?
   end
 end
