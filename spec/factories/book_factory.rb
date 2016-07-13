@@ -3,6 +3,6 @@ FactoryGirl.define do
     title 'Test book'
     author 'Test author'
 
-    to_create { |instance| BookRepository.create(instance) }
+    to_create { |instance| book = BookRepository.create(instance); instance.id = book.id }
   end
 end
