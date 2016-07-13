@@ -3,5 +3,6 @@ module Web::Controllers::Books
     include Web::Action
 
     def call(params); end
+    params BookParams
   end
 end

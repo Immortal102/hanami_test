@@ -4,12 +4,7 @@ module Web::Controllers::Books
 
     expose :book
 
-    params do
-      param :book do
-        param :title,  presence: true
-        param :author, presence: true
-      end
-    end
+    params BookParams
 
     def call(params)
       @book = Book.new(params[:book])
