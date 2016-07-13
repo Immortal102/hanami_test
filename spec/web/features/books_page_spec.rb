@@ -34,7 +34,8 @@ describe 'books page' do
       end
 
       it 'contains correct books content' do
-        expect(index_page.books.map(&:text)).to match_array(['Book1 ( first_author )', 'Book2 ( second_author )'])
+        expect(index_page.books.map { |b| b.title.text }).to match_array(['Book1', 'Book2'])
+        expect(index_page.books.map { |b| b.author.text }).to match_array(['( first_author )', '( second_author )'])
       end
 
       it 'does not show no books placeholder' do
@@ -52,7 +53,8 @@ describe 'books page' do
       new_page.form.submit.click
 
       expect(index_page).to be_displayed
-      expect(index_page.books.first.text).to eq('Some title ( Some author )')
+      expect(index_page.books.first.title.text).to eq('Some title')
+      expect(index_page.books.first.author.text).to eq('( Some author )')
     end
 
     it 'validates title presence' do
@@ -67,6 +69,38 @@ describe 'books page' do
       new_page.form.submit.click
 
       expect(new_page).to have_content('author must be present')
+    end
+  end
+
+  describe 'edit' do
+    let(:book) { create :book, title: 'title', author: 'author' }
+    let(:edit_page) { Books::EditPage.new }
+
+    before { edit_page.load book_id: book.id }
+
+    it 'allows to update book' do
+      edit_page.form.title.set 'Updated title'
+      edit_page.form.author.set 'Updated author'
+      edit_page.form.submit.click
+
+      expect(index_page.books.map{ |b| b.title.text }).to include('Updated title')
+      expect(index_page.books.map{ |b| b.author.text }).to include('( Updated author )')
+    end
+
+    it 'validates title presence' do
+      edit_page.form.title.set ''
+      edit_page.form.author.set 'Updated author'
+      edit_page.form.submit.click
+
+      expect(edit_page).to have_content('title must be present')
+    end
+
+    it 'validates author presence' do
+      edit_page.form.title.set 'Updated title'
+      edit_page.form.author.set ''
+      edit_page.form.submit.click
+
+      expect(edit_page).to have_content('author must be present')
     end
   end
 end
