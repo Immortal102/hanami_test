@@ -103,4 +103,15 @@ describe 'books page' do
       expect(edit_page).to have_content('author must be present')
     end
   end
+
+  describe 'delete' do
+    let!(:book) { create :book }
+
+    it 'allows to delete book' do
+      index_page.load
+      expect { index_page.books.first.delete.click }.to change {
+        index_page.books.count
+      }.by(-1)
+    end
+  end
 end
