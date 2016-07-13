@@ -17,6 +17,6 @@
               )
             %td
               = link_to 'Edit', routes.edit_book_path(book.id)
-              = link_to 'Delete', '/'
+              = link_to 'Delete', routes.delete_book_path(book.id)
   - else
     .no-books There are no books yet
